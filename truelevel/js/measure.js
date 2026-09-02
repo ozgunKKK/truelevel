@@ -54,24 +54,30 @@ document.getElementById("btn-submit").addEventListener("click", () => {
   }
 
   const strategy = getActiveValue(strategyGroup);
-  let requiredTurns;
+  let solution;
   let fixedKnob = null;
 
   if (strategy === "A") {
     fixedKnob = parseInt(getActiveValue(knobPicker), 10);
-    requiredTurns = Calc.computeStrategyA(K, M, fixedKnob);
+    solution = Calc.computeStrategyA(K, M, fixedKnob);
   } else {
-    requiredTurns = Calc.computeStrategyB(K, M);
+    solution = Calc.computeStrategyB(K, M);
   }
 
-  if (!requiredTurns) {
+  if (!solution) {
     errorText.textContent =
       "Could not compute a result from the current calibration matrix. Try recalibrating.";
     errorText.hidden = false;
     return;
   }
 
-  AppStorage.setResult({ strategy, fixedKnob, requiredTurns });
+  AppStorage.setResult({
+    strategy,
+    fixedKnob,
+    measurement: M,
+    requiredTurns: solution.turns,
+    targetHeight: solution.targetHeight,
+  });
   window.location.href = "results.html";
 });
 

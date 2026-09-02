@@ -7,6 +7,7 @@ const { vecSub, vecScale, vecDot, vecSum, inverse3, matVec, matRow } =
 
 // Strategy A: fix knob `f` (0-indexed) at 0 turns, solve for the target
 // height that makes required_turns[f] == 0, then compute all required turns.
+// Returns { turns: 3-vector, targetHeight: number } or null.
 function computeStrategyA(K, M, f) {
   const Kinv = inverse3(K);
   if (!Kinv) return null;
@@ -16,13 +17,14 @@ function computeStrategyA(K, M, f) {
   const targetHeight = vecDot(w, M) / s;
   const target = [targetHeight, targetHeight, targetHeight];
   const requiredChange = vecSub(target, M);
-  return matVec(Kinv, requiredChange);
+  return { turns: matVec(Kinv, requiredChange), targetHeight };
 }
 
 // Strategy B: minimum-norm solution. required_turns(h) = Kinv @ ([h,h,h] - M)
 // is affine in h: required_turns(h) = h * (Kinv @ [1,1,1]) - (Kinv @ M).
 // Let a = Kinv @ [1,1,1], b = Kinv @ M. required_turns(h) = h*a - b.
 // Minimize ||h*a - b||^2 over h  =>  h* = (a . b) / (a . a).
+// Returns { turns: 3-vector, targetHeight: number } or null.
 function computeStrategyB(K, M) {
   const Kinv = inverse3(K);
   if (!Kinv) return null;
@@ -32,7 +34,7 @@ function computeStrategyB(K, M) {
   if (Math.abs(aa) < 1e-10) return null;
   const ab = vecDot(a, b);
   const hStar = ab / aa;
-  return vecSub(vecScale(a, hStar), b);
+  return { turns: vecSub(vecScale(a, hStar), b), targetHeight: hStar };
 }
 
 // Format a signed turn count into display fields.

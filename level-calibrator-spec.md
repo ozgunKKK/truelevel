@@ -113,6 +113,11 @@ Multi-page navigation (separate pages, not a single scrolling/tab page).
    - Submit → Results
 
 4. **Results**
+   - Expected level height readout: the target height (same for all 3
+     points) that the platform reaches once the listed turns are
+     applied. For Strategy A this is the height that holds the fixed
+     knob at 0 turns; for Strategy B it is the minimum-effort target
+     height `h*`. Shown with the current measured range for context.
    - One card per knob: turns, degrees, direction, combined
      turn+degree format when applicable
    - Simple status icon/indicator per knob (no heavy animation)

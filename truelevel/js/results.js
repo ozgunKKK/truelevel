@@ -16,6 +16,30 @@ document.getElementById("strategy-subtitle").textContent =
     ? `Strategy: Fix Knob ${result.fixedKnob + 1} at 0 turns.`
     : "Strategy: Minimize total movement across all knobs.";
 
+// Trim to 3 decimals without trailing zeros (e.g. 0.525, 152.34).
+function fmtHeight(v) {
+  return Number(v.toFixed(3)).toString();
+}
+
+if (typeof result.targetHeight === "number" && isFinite(result.targetHeight)) {
+  const card = document.getElementById("target-height-card");
+  document.getElementById("target-height-value").textContent = fmtHeight(
+    result.targetHeight
+  );
+  const note = document.getElementById("target-height-note");
+  const M = result.measurement;
+  if (Array.isArray(M) && M.length === 3) {
+    const lo = Math.min(...M);
+    const hi = Math.max(...M);
+    note.textContent =
+      `All 3 points end here after the turns below. ` +
+      `Now: ${fmtHeight(lo)} to ${fmtHeight(hi)} (spread ${fmtHeight(hi - lo)}).`;
+  } else {
+    note.textContent = "All 3 points end at this height after the turns below.";
+  }
+  card.hidden = false;
+}
+
 const list = document.getElementById("results-list");
 
 result.requiredTurns.forEach((signedTurns, idx) => {
