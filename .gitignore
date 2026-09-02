@@ -7,3 +7,7 @@ Thumbs.db
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Local dev smoke test (not part of the deployed site)
+/smoke-test.py
+/drive_live.py
