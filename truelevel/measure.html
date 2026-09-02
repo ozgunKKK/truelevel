@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TrueLevel &mdash; Measurement</title>
+<meta name="theme-color" content="#0d9488" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="13" stroke="#0D9488" stroke-width="2"/>
+      <line x1="8" y1="16" x2="24" y2="16" stroke="#0D9488" stroke-width="2"/>
+    </svg>
+    <h1>Current Measurement</h1>
+  </header>
+
+  <div class="notice">
+    Measure at the same 3 points used during calibration.
+  </div>
+
+  <div class="card">
+    <h2>Point readings</h2>
+    <div class="point-row">
+      <div class="field point-field">
+        <label>Point 1</label>
+        <input type="number" step="any" id="m-1" inputmode="decimal" />
+      </div>
+      <div class="field point-field">
+        <label>Point 2</label>
+        <input type="number" step="any" id="m-2" inputmode="decimal" />
+      </div>
+      <div class="field point-field">
+        <label>Point 3</label>
+        <input type="number" step="any" id="m-3" inputmode="decimal" />
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Strategy</h2>
+    <div class="field">
+      <div class="select-group" id="strategy-group">
+        <div class="select-option active" data-value="A">Fix a knob</div>
+        <div class="select-option" data-value="B">Minimize total movement</div>
+      </div>
+    </div>
+    <div class="field" id="knob-picker-field">
+      <label>Knob to hold at 0 turns</label>
+      <div class="knob-picker" id="knob-picker">
+        <div class="select-option active" data-value="0">Knob 1</div>
+        <div class="select-option" data-value="1">Knob 2</div>
+        <div class="select-option" data-value="2">Knob 3</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="error-text" id="error-text" hidden></p>
+
+  <button class="btn-primary" id="btn-submit">Calculate</button>
+  <div style="margin-top: 0.75rem;">
+    <a class="btn-text" href="index.html">Back to Home</a>
+  </div>
+</div>
+
+<script src="js/matrix.js"></script>
+<script src="js/leveling.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/measure.js"></script>
+<script src="js/register-sw.js"></script>
+</body>
+</html>

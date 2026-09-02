@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TrueLevel &mdash; Calibration</title>
+<meta name="theme-color" content="#0d9488" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="13" stroke="#0D9488" stroke-width="2"/>
+      <line x1="8" y1="16" x2="24" y2="16" stroke="#0D9488" stroke-width="2"/>
+    </svg>
+    <h1>Calibration</h1>
+  </header>
+
+  <div class="progress">
+    <span class="progress-label" id="progress-label">Step 1 of 4</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width: 25%;"></div>
+    </div>
+  </div>
+
+  <div class="notice">
+    Measure at 3 fixed points on the platform. Use the exact same 3 points
+    for every measurement in this app, including all future current
+    measurements.
+  </div>
+
+  <!-- Step 1: initial measurement -->
+  <section id="step-1" class="step">
+    <div class="card">
+      <h2>Initial measurement</h2>
+      <p class="subtitle" style="margin-bottom: 0.75rem;">
+        Record the height at each of the 3 points before turning any knob.
+      </p>
+      <div class="point-row">
+        <div class="field point-field">
+          <label>Point 1</label>
+          <input type="number" step="any" id="initial-1" inputmode="decimal" />
+        </div>
+        <div class="field point-field">
+          <label>Point 2</label>
+          <input type="number" step="any" id="initial-2" inputmode="decimal" />
+        </div>
+        <div class="field point-field">
+          <label>Point 3</label>
+          <input type="number" step="any" id="initial-3" inputmode="decimal" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps 2-4: per-knob after measurement -->
+  <section id="step-2" class="step" hidden></section>
+  <section id="step-3" class="step" hidden></section>
+  <section id="step-4" class="step" hidden></section>
+
+  <p class="error-text" id="error-text" hidden></p>
+
+  <div class="btn-row">
+    <button class="btn-secondary" id="btn-back" hidden>Back</button>
+    <button class="btn-primary" id="btn-next">Next</button>
+  </div>
+  <div style="margin-top: 0.75rem;">
+    <a class="btn-text" href="index.html">Cancel</a>
+  </div>
+</div>
+
+<script src="js/matrix.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/calibrate.js"></script>
+<script src="js/register-sw.js"></script>
+</body>
+</html>
