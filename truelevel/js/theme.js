@@ -13,6 +13,7 @@ const THEMES = [
   { id: "blueprint", name: "Blueprint", themeColor: "#0b2545" },
   { id: "pastel", name: "Pastel", themeColor: "#f3edff" },
   { id: "vangogh", name: "Van Gogh", themeColor: "#4c7093" },
+  { id: "matisse", name: "Matisse", themeColor: "#287c74" },
 ];
 
 function getTheme() {
