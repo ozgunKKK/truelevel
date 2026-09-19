@@ -760,6 +760,11 @@ html[data-text-size="large"] {
   text-decoration: none;
 }
 
+/* Back arrow on the left of a header (Settings); sits flush with the page edge */
+.icon-btn.back-btn {
+  margin-left: -0.6rem;
+}
+
 .icon-btn:active {
   background: rgba(128, 128, 128, 0.25);
 }
