@@ -11,7 +11,7 @@ const THEMES = [
   { id: "light", name: "Classic", themeColor: "#0d9488" },
   { id: "dark", name: "Dark", themeColor: "#0f1416" },
   { id: "blueprint", name: "Blueprint", themeColor: "#0b2545" },
-  { id: "contrast", name: "High contrast", themeColor: "#005f56" },
+  { id: "pastel", name: "Pastel", themeColor: "#f3edff" },
 ];
 
 function getTheme() {

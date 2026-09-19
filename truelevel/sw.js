@@ -1,4 +1,4 @@
-const CACHE_NAME = "truelevel-cache-v5";
+const CACHE_NAME = "truelevel-cache-v6";
 const APP_SHELL = [
   "./",
   "./index.html",
