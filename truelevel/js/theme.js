@@ -43,43 +43,41 @@ function setTheme(id) {
   applyTheme(id);
 }
 
-// Renders the picker tiles into `container`. Each tile carries its own
-// data-theme so it previews itself with that theme's colors.
+// Renders one round swatch per theme into `container`, plus a caption with the
+// current theme's name. Each swatch carries its own data-theme so it previews
+// itself with that theme's colors.
 function mountPicker(container) {
+  const row = document.createElement("div");
+  row.className = "theme-picker";
+  row.setAttribute("role", "group");
+  row.setAttribute("aria-label", "Theme");
+  const caption = document.createElement("p");
+  caption.className = "theme-caption";
+  container.replaceChildren(row, caption);
+
   function render() {
     const current = getTheme();
-    container.replaceChildren();
+    row.replaceChildren();
     THEMES.forEach((theme) => {
-      const tile = document.createElement("button");
-      tile.type = "button";
-      tile.className = "theme-tile" + (theme.id === current ? " active" : "");
-      tile.dataset.theme = theme.id;
-      tile.setAttribute("aria-pressed", String(theme.id === current));
-
-      const name = document.createElement("span");
-      name.className = "theme-tile-name";
-      name.textContent = theme.name;
-      if (theme.id === current) {
-        const check = document.createElement("span");
-        check.className = "theme-tile-check";
-        check.textContent = "✓";
-        name.append(check);
-      }
-
-      const preview = document.createElement("span");
-      preview.className = "theme-tile-preview";
-      preview.innerHTML =
-        '<span class="sw-accent"></span><span class="sw-surface"></span><span class="sw-muted"></span>';
-
-      tile.append(name, preview);
-      tile.addEventListener("click", () => {
+      const swatch = document.createElement("button");
+      swatch.type = "button";
+      swatch.className = "theme-swatch" + (theme.id === current ? " active" : "");
+      swatch.dataset.theme = theme.id;
+      swatch.title = theme.name;
+      swatch.setAttribute("aria-label", theme.name);
+      swatch.setAttribute("aria-pressed", String(theme.id === current));
+      swatch.addEventListener("click", () => {
         setTheme(theme.id);
         render();
       });
-      container.append(tile);
+      row.append(swatch);
     });
+    const name = THEMES.find((t) => t.id === current).name;
+    caption.replaceChildren("Theme: ");
+    const strong = document.createElement("strong");
+    strong.textContent = name;
+    caption.append(strong);
   }
-  container.classList.add("theme-picker");
   render();
 }
 

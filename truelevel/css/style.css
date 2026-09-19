@@ -365,7 +365,7 @@ button,
   transition: background 0.15s ease, transform 0.05s ease;
 }
 
-button:not(.theme-tile):not(.btn-text),
+button:not(.theme-swatch):not(.btn-text),
 .btn {
   min-height: 3.25rem;
   border-radius: 999px;
@@ -598,69 +598,45 @@ html[data-theme="pastel"] .readout {
   border-radius: 12px;
 }
 
-/* Theme picker (home page) */
+/* Theme picker (home page): one row of round swatches. Each swatch carries its
+   own data-theme, so it paints bands of that theme's page, card and accent. */
 .theme-picker {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.6rem;
-}
-
-.theme-tile {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.7rem;
-  background: var(--bg);
-  color: var(--page-text);
-  border: 2px solid var(--border);
-  border-radius: 10px;
+}
+
+.theme-swatch {
+  width: 40px;
+  height: 40px;
+  min-height: 0;
+  padding: 0;
+  flex: 0 0 auto;
+  border: 2px solid rgba(128, 128, 128, 0.55);
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--bg) 0 38%,
+    var(--surface) 38% 66%,
+    var(--accent) 66% 100%
+  );
+}
+
+.theme-swatch.active {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+
+.theme-caption {
+  margin: 0.6rem 0 0;
+  text-align: center;
   font-size: 0.85rem;
-  text-align: left;
+  color: var(--text-muted);
 }
 
-.theme-tile.active {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent);
-}
-
-.theme-tile-name {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.theme-tile-check {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.theme-tile-preview {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.theme-tile-preview span {
-  height: 0.8rem;
-  border-radius: 999px;
-}
-
-.theme-tile-preview .sw-accent {
-  flex: 0 0 1.6rem;
-  background: var(--accent);
-}
-
-.theme-tile-preview .sw-surface {
-  flex: 0 0 1.1rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-}
-
-.theme-tile-preview .sw-muted {
-  flex: 1;
-  background: var(--text-muted);
-  opacity: 0.55;
+.theme-caption strong {
+  color: var(--text);
 }
 
 /* Keep 3 point readings (e.g. "-0.150") from clipping on narrow phones:
@@ -732,11 +708,6 @@ html:is([data-theme="vangogh"], [data-theme="matisse"]) .error-text {
   border-radius: 8px;
   padding: 0.5rem 0.75rem;
   font-weight: 600;
-}
-
-/* An odd last tile spans the row instead of leaving a gap */
-.theme-tile:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
 }
 
 /* Matisse: a fuchsia patch, olive outlines, hard violet shadow, inked CTAs */
