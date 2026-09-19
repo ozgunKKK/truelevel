@@ -1,4 +1,4 @@
-const CACHE_NAME = "truelevel-cache-v3";
+const CACHE_NAME = "truelevel-cache-v4";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -26,7 +26,13 @@ const APP_SHELL = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
+    // "no-cache" forces revalidation so a stale HTTP-cached copy (GitHub Pages
+    // sends max-age=600) never gets frozen into the new cache.
+    caches
+      .open(CACHE_NAME)
+      .then((cache) =>
+        cache.addAll(APP_SHELL.map((url) => new Request(url, { cache: "no-cache" })))
+      )
   );
   self.skipWaiting();
 });
@@ -50,7 +56,7 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   event.respondWith(
     caches.match(event.request).then((cached) => {
-      const network = fetch(event.request)
+      const network = fetch(event.request, { cache: "no-cache" })
         .then((response) => {
           if (response.ok) {
             const clone = response.clone();
