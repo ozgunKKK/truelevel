@@ -2,6 +2,8 @@
 
 const AppStorage = window.TrueLevelStorage;
 
+// Adopts a pre-library calibration into Saved Calibrations before it is replaced.
+AppStorage.listCalibrations();
 const K = AppStorage.getK();
 const container = document.getElementById("matrix-container");
 

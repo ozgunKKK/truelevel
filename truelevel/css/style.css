@@ -366,3 +366,56 @@ button:active,
   font-size: 0.75rem;
   margin-top: 2rem;
 }
+
+/* Saved calibrations */
+.calib-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.calib-name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.calib-date {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  margin: 0.15rem 0 0.6rem;
+}
+
+.badge {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #f0fdfa;
+  color: var(--accent-dark);
+  border: 1px solid var(--accent);
+}
+
+.calib-item details {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.calib-item summary {
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+}
+
+.calib-actions {
+  margin-top: 0.75rem;
+}
+
+.btn-danger {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+
+.btn-danger:hover {
+  background: #fef2f2;
+}

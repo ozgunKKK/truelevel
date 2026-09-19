@@ -55,6 +55,15 @@ function knobStepHtml(knobIndex) {
           <div class="select-option" data-value="ccw">Counterclockwise</div>
         </div>
       </div>
+      ${
+        knobNum === 3
+          ? `<div class="field">
+        <label>Save as (optional)</label>
+        <input type="text" id="calib-name" maxlength="60" autocomplete="off"
+          placeholder="${AppStorage.defaultCalibrationName()}" />
+      </div>`
+          : ""
+      }
     </div>
   `;
 }
@@ -103,6 +112,8 @@ function populateFieldsFromState() {
       opt.classList.toggle("active", opt.dataset.value === data.direction);
     });
   }
+  const nameEl = document.getElementById("calib-name");
+  if (nameEl && state.name) nameEl.value = state.name;
 }
 
 function showError(msg) {
@@ -170,6 +181,8 @@ function saveCurrentStepInputs() {
     turns,
     direction: activeOpt.dataset.value,
   };
+  const nameEl = document.getElementById("calib-name");
+  if (nameEl) state.name = nameEl.value.trim();
   return true;
 }
 
@@ -185,7 +198,7 @@ function finishCalibration() {
     );
     return;
   }
-  AppStorage.setK(columns);
+  AppStorage.saveCalibration(state.name, columns);
   AppStorage.clearCalibProgress();
   window.location.href = "index.html";
 }
