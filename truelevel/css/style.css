@@ -520,13 +520,30 @@ html[data-theme="pastel"] .notice {
   border-radius: 16px;
 }
 
-html[data-theme="pastel"] button,
-html[data-theme="pastel"] .btn,
 html[data-theme="pastel"] input[type="number"],
 html[data-theme="pastel"] input[type="text"],
 html[data-theme="pastel"] .select-option,
 html[data-theme="pastel"] .readout {
   border-radius: 12px;
+}
+
+/* Pastel buttons: taller, pill-shaped, and the main call to action sits
+   inside its card instead of touching the edges. */
+html[data-theme="pastel"] button:not(.theme-tile):not(.btn-text),
+html[data-theme="pastel"] .btn {
+  min-height: 3.25rem;
+  border-radius: 999px;
+}
+
+html[data-theme="pastel"] .center-cta {
+  padding: 1.75rem 1.25rem;
+}
+
+html[data-theme="pastel"] .center-cta .btn {
+  width: auto;
+  min-width: 75%;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 /* Theme picker (home page) */
