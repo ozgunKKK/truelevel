@@ -45,4 +45,6 @@ if (K) {
   `;
 }
 
+window.TrueLevelTheme.mountPicker(document.getElementById("theme-picker"));
+
 })();

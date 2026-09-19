@@ -1,16 +1,90 @@
-:root {
+/* Theme tokens. :root and [data-theme="light"] are the Classic theme; the
+   other themes only override tokens. Any element with a data-theme attribute
+   (the <html> tag, or a preview tile in the picker) re-scopes the tokens. */
+:root,
+[data-theme="light"] {
   --bg: #fafafa;
   --surface: #ffffff;
   --accent: #0d9488;
   --accent-dark: #0f766e;
+  --accent-text: #0f766e;
+  --accent-soft: #f0fdfa;
+  --accent-border: #99f6e4;
+  --on-accent: #ffffff;
+  --focus-ring: rgba(13, 148, 136, 0.15);
   --text: #1c1c1c;
   --text-muted: #6b7280;
   --border: #d1d5db;
   --readout-bg: #f3f4f6;
+  --inset-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
   --ok: #16a34a;
   --warn: #dc2626;
+  --warn-soft: #fef2f2;
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Dark instrument: easy on the eyes in a dim workshop. */
+[data-theme="dark"] {
+  --bg: #0f1416;
+  --surface: #182024;
+  --accent: #2dd4bf;
+  --accent-dark: #5eead4;
+  --accent-text: #5eead4;
+  --accent-soft: #10302c;
+  --accent-border: #1f5a52;
+  --on-accent: #04201c;
+  --focus-ring: rgba(45, 212, 191, 0.3);
+  --text: #e6edf0;
+  --text-muted: #93a1a8;
+  --border: #2c3a40;
+  --readout-bg: #0b1012;
+  --inset-shadow: none;
+  --ok: #4ade80;
+  --warn: #f87171;
+  --warn-soft: #3a1618;
+}
+
+/* Blueprint: navy paper with a drafting grid. */
+[data-theme="blueprint"] {
+  --bg: #0b2545;
+  --surface: #0f3160;
+  --accent: #38bdf8;
+  --accent-dark: #7dd3fc;
+  --accent-text: #7dd3fc;
+  --accent-soft: #0c3b6b;
+  --accent-border: #2a6ba3;
+  --on-accent: #062033;
+  --focus-ring: rgba(56, 189, 248, 0.35);
+  --text: #eaf3ff;
+  --text-muted: #94b4d9;
+  --border: #2a5588;
+  --readout-bg: #0a2242;
+  --inset-shadow: none;
+  --ok: #34d399;
+  --warn: #fb7185;
+  --warn-soft: #4a1d33;
+}
+
+/* High contrast: black on white, bigger type and targets, for sunlight. */
+[data-theme="contrast"] {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --accent: #005f56;
+  --accent-dark: #003d37;
+  --accent-text: #00423b;
+  --accent-soft: #e3f4f1;
+  --accent-border: #005f56;
+  --on-accent: #ffffff;
+  --focus-ring: rgba(0, 95, 86, 0.35);
+  --text: #000000;
+  --text-muted: #2e2e2e;
+  --border: #000000;
+  --readout-bg: #f0f0f0;
+  --inset-shadow: none;
+  --ok: #006400;
+  --warn: #b00000;
+  --warn-soft: #fde8e8;
 }
 
 * {
@@ -82,9 +156,9 @@ p.subtitle {
 }
 
 .notice {
-  background: #f0fdfa;
-  border: 1px solid #99f6e4;
-  color: var(--accent-dark);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-text);
   border-radius: 8px;
   padding: 0.75rem 0.9rem;
   font-size: 0.85rem;
@@ -155,7 +229,7 @@ input[type="text"] {
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--readout-bg);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--inset-shadow);
   color: var(--text);
   text-align: center;
 }
@@ -164,7 +238,7 @@ input[type="number"]:focus,
 input[type="text"]:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 3px rgba(13, 148, 136, 0.15);
+  box-shadow: var(--inset-shadow), 0 0 0 3px var(--focus-ring);
 }
 
 .readout {
@@ -173,7 +247,7 @@ input[type="text"]:focus {
   background: var(--readout-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--inset-shadow);
   padding: 0.6rem 0.75rem;
   font-size: 1rem;
 }
@@ -200,8 +274,8 @@ input[type="text"]:focus {
 
 .select-option.active {
   border-color: var(--accent);
-  background: #f0fdfa;
-  color: var(--accent-dark);
+  background: var(--accent-soft);
+  color: var(--accent-text);
 }
 
 .knob-picker {
@@ -241,7 +315,7 @@ button:active,
 
 .btn-primary {
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .btn-primary:hover {
@@ -250,12 +324,12 @@ button:active,
 
 .btn-secondary {
   background: var(--surface);
-  color: var(--accent-dark);
+  color: var(--accent-text);
   border: 1px solid var(--accent);
 }
 
 .btn-secondary:hover {
-  background: #f0fdfa;
+  background: var(--accent-soft);
 }
 
 .btn-text {
@@ -392,8 +466,8 @@ button:active,
   font-weight: 600;
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
-  background: #f0fdfa;
-  color: var(--accent-dark);
+  background: var(--accent-soft);
+  color: var(--accent-text);
   border: 1px solid var(--accent);
 }
 
@@ -417,5 +491,135 @@ button:active,
 }
 
 .btn-danger:hover {
-  background: #fef2f2;
+  background: var(--warn-soft);
+}
+
+/* Icons follow the theme accent */
+.brand-icon,
+.knob-icon {
+  color: var(--accent);
+}
+
+/* Blueprint drafting grid */
+html[data-theme="blueprint"] body {
+  background-image:
+    linear-gradient(rgba(125, 211, 252, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-attachment: fixed;
+}
+
+/* High contrast: bigger type, heavier borders, taller touch targets */
+html[data-theme="contrast"] {
+  font-size: 112.5%;
+}
+
+html[data-theme="contrast"] .card,
+html[data-theme="contrast"] .notice,
+html[data-theme="contrast"] input[type="number"],
+html[data-theme="contrast"] input[type="text"],
+html[data-theme="contrast"] .select-option,
+html[data-theme="contrast"] .btn-secondary,
+html[data-theme="contrast"] .readout {
+  border-width: 2px;
+}
+
+html[data-theme="contrast"] button,
+html[data-theme="contrast"] .btn {
+  min-height: 3.25rem;
+}
+
+html[data-theme="contrast"] label {
+  color: var(--text);
+}
+
+/* Theme picker (home page) */
+.theme-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.theme-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  padding: 0.7rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.theme-tile.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.theme-tile-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.theme-tile-check {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.theme-tile-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.theme-tile-preview span {
+  height: 0.8rem;
+  border-radius: 999px;
+}
+
+.theme-tile-preview .sw-accent {
+  flex: 0 0 1.6rem;
+  background: var(--accent);
+}
+
+.theme-tile-preview .sw-surface {
+  flex: 0 0 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.theme-tile-preview .sw-muted {
+  flex: 1;
+  background: var(--text-muted);
+  opacity: 0.55;
+}
+
+/* Keep 3 point readings (e.g. "-0.150") from clipping on narrow phones:
+   tighter padding, and no spinner arrows eating the width. */
+.point-row {
+  gap: 0.4rem;
+}
+
+.point-field input {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+html[data-theme="contrast"] .point-field input {
+  font-size: 1rem;
 }

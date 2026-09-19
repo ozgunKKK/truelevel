@@ -50,8 +50,8 @@ result.requiredTurns.forEach((signedTurns, idx) => {
   card.className = "card knob-result";
   card.innerHTML = `
     <svg class="knob-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="22" cy="22" r="17" stroke="#0D9488" stroke-width="2"/>
-      <line x1="10" y1="22" x2="34" y2="22" stroke="#0D9488" stroke-width="2"/>
+      <circle cx="22" cy="22" r="17" stroke="currentColor" stroke-width="2"/>
+      <line x1="10" y1="22" x2="34" y2="22" stroke="currentColor" stroke-width="2"/>
     </svg>
     <div class="knob-result-body">
       <div class="knob-result-title">
