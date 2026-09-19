@@ -9,7 +9,8 @@ if (!result) {
   return;
 }
 
-const ON_TARGET_THRESHOLD_TURNS = 0.03; // ~10.8 degrees
+const prefs = window.TrueLevelPrefs.getPrefs();
+const unit = prefs.heightUnit ? ` ${prefs.heightUnit}` : "";
 
 document.getElementById("strategy-subtitle").textContent =
   result.strategy === "A"
@@ -18,7 +19,7 @@ document.getElementById("strategy-subtitle").textContent =
 
 // Trim to 3 decimals without trailing zeros (e.g. 0.525, 152.34).
 function fmtHeight(v) {
-  return Number(v.toFixed(3)).toString();
+  return Number(v.toFixed(3)).toString() + unit;
 }
 
 if (typeof result.targetHeight === "number" && isFinite(result.targetHeight)) {
@@ -43,8 +44,8 @@ if (typeof result.targetHeight === "number" && isFinite(result.targetHeight)) {
 const list = document.getElementById("results-list");
 
 result.requiredTurns.forEach((signedTurns, idx) => {
-  const f = Calc.formatTurn(signedTurns);
-  const onTarget = f.turns < ON_TARGET_THRESHOLD_TURNS;
+  const f = Calc.formatTurn(signedTurns, prefs.angleFormat);
+  const onTarget = f.degrees < prefs.onTargetDegrees;
 
   const card = document.createElement("div");
   card.className = "card knob-result";
@@ -62,7 +63,7 @@ result.requiredTurns.forEach((signedTurns, idx) => {
         ${f.display} ${onTarget ? "" : `&mdash; ${f.direction}`}
       </div>
       <div class="knob-result-sub">
-        ${f.turns.toFixed(3)} turn(s) &middot; ${f.degrees.toFixed(1)}&deg; total
+        ${f.sub.replace("·", "&middot;").replace("°", "&deg;")}
       </div>
     </div>
   `;

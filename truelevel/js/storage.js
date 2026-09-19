@@ -128,6 +128,32 @@ function deleteCalibration(id) {
   }
 }
 
+// Adds backup entries whose id is not already present; existing ones win.
+// Callers must validate entries first (see backup.js).
+function mergeCalibrations(entries) {
+  const list = listCalibrations();
+  const known = new Set(list.map((c) => c.id));
+  let added = 0;
+  entries.forEach((e) => {
+    if (known.has(e.id)) return;
+    list.push({ id: e.id, name: e.name, K: e.K, createdAt: e.createdAt });
+    known.add(e.id);
+    added += 1;
+  });
+  writeLibrary(list);
+  return { added, skipped: entries.length - added };
+}
+
+// Removes everything TrueLevel stored on this device (calibrations, settings,
+// theme, in-progress data). Does not touch the app's offline cache.
+function clearAll() {
+  [localStorage, sessionStorage].forEach((store) => {
+    Object.keys(store)
+      .filter((k) => k.startsWith("truelevel."))
+      .forEach((k) => store.removeItem(k));
+  });
+}
+
 function getCalibProgress() {
   const raw = sessionStorage.getItem(CALIB_PROGRESS_KEY);
   if (!raw) return null;
@@ -171,6 +197,8 @@ window.TrueLevelStorage = {
   useCalibration,
   renameCalibration,
   deleteCalibration,
+  mergeCalibrations,
+  clearAll,
   getCalibProgress,
   setCalibProgress,
   clearCalibProgress,

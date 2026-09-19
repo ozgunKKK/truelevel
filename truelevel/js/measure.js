@@ -9,6 +9,8 @@ if (!K) {
   return;
 }
 
+window.TrueLevelPrefs.applyUnitNotes();
+
 const strategyGroup = document.getElementById("strategy-group");
 const knobPickerField = document.getElementById("knob-picker-field");
 const knobPicker = document.getElementById("knob-picker");

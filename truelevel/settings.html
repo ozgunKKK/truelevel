@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TrueLevel &mdash; Settings</title>
+<meta name="theme-color" content="#0d9488" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/theme.js"></script>
+<script src="js/prefs.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2"/>
+      <line x1="8" y1="16" x2="24" y2="16" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <h1>Settings</h1>
+  </header>
+
+  <section class="card">
+    <h2>Appearance</h2>
+    <div class="field">
+      <label>Theme</label>
+      <div id="theme-picker"></div>
+    </div>
+    <div class="field">
+      <label>Text size</label>
+      <div class="select-group" id="text-size"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Results</h2>
+    <div class="field">
+      <label>Angle display</label>
+      <div class="select-group" id="angle-format"></div>
+      <p class="hint" id="angle-example"></p>
+    </div>
+    <div class="field">
+      <label for="threshold">On-target threshold (degrees)</label>
+      <input type="number" id="threshold" step="any" inputmode="decimal" />
+      <p class="hint" id="threshold-hint"></p>
+      <button class="btn-text" id="btn-threshold-reset" type="button">Reset to default</button>
+    </div>
+    <div class="field">
+      <label>Height unit label</label>
+      <div class="select-group" id="height-unit"></div>
+      <p class="hint">Only a label shown next to readings and results. It does not convert anything.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Data</h2>
+    <p class="hint" id="data-summary"></p>
+    <div class="stack">
+      <a class="btn btn-secondary" href="calibrations.html">Saved calibrations</a>
+      <button class="btn-secondary" id="btn-export" type="button">Export backup file</button>
+      <button class="btn-secondary" id="btn-copy" type="button">Copy backup as text</button>
+      <button class="btn-secondary" id="btn-import" type="button">Import backup file</button>
+      <input type="file" id="import-file" accept="application/json,.json" hidden />
+    </div>
+    <details class="guide">
+      <summary>Import from pasted text</summary>
+      <textarea id="import-text" rows="4" placeholder="Paste backup text here" spellcheck="false"></textarea>
+      <button class="btn-secondary" id="btn-import-text" type="button">Import text</button>
+    </details>
+    <p class="hint" id="data-status" role="status" hidden></p>
+    <p class="hint">
+      Data lives only in this browser. Export a backup before clearing browser data or switching phones.
+    </p>
+    <button class="btn-secondary btn-danger" id="btn-clear" type="button">Delete all data</button>
+  </section>
+
+  <section class="card">
+    <h2>Help</h2>
+    <p class="hint" id="install-status"></p>
+    <details class="guide" id="guide-ios">
+      <summary>Add to Home Screen &mdash; iPhone / iPad</summary>
+      <ol>
+        <li>Open this page in <strong>Safari</strong> (not Chrome or an in-app browser).</li>
+        <li>Tap the <strong>Share</strong> button (square with an arrow). On newer iOS it may be under the <strong>&hellip;</strong> menu.</li>
+        <li>Scroll down the list and tap <strong>Add to Home Screen</strong>, then <strong>Add</strong>.</li>
+      </ol>
+      <p class="hint">
+        Not in the list? Scroll to the bottom of the share sheet and tap <strong>Edit Actions</strong> (or <strong>More</strong>) and enable it.
+        It is also missing in Private Browsing.
+      </p>
+    </details>
+    <details class="guide" id="guide-android">
+      <summary>Install &mdash; Android (Chrome)</summary>
+      <ol>
+        <li>Open this page in Chrome.</li>
+        <li>Tap the <strong>&#8942;</strong> menu at the top right.</li>
+        <li>Tap <strong>Install app</strong> (or <strong>Add to Home screen</strong>) and confirm.</li>
+      </ol>
+    </details>
+    <details class="guide" id="guide-desktop">
+      <summary>Install &mdash; computer</summary>
+      <ol>
+        <li><strong>Chrome / Edge:</strong> click the install icon at the right end of the address bar.</li>
+        <li><strong>Safari (Mac):</strong> File &rarr; Add to Dock.</li>
+      </ol>
+    </details>
+    <details class="guide">
+      <summary>How calibration works</summary>
+      <ol>
+        <li>Pick 3 fixed points on the platform and always measure the height at exactly those points.</li>
+        <li>Calibration turns each knob by a known amount and records how the 3 heights change. That builds a 3&times;3 matrix (height change per turn).</li>
+        <li>When you measure, the app uses that matrix to compute how far to turn each knob so all 3 points end at the same height.</li>
+        <li>Recalibrate whenever the platform, its knobs or the measurement points change.</li>
+      </ol>
+    </details>
+    <h3>About</h3>
+    <p class="hint" id="about-build"></p>
+    <p class="hint">
+      <a href="https://github.com/ozgunKKK/truelevel" target="_blank" rel="noopener">Source code on GitHub</a>
+    </p>
+    <button class="btn-secondary" id="btn-reload" type="button">Reload latest version</button>
+    <p class="hint">Fetches fresh app files. Your calibrations and settings are kept.</p>
+  </section>
+
+  <div style="margin-top: 0.5rem;">
+    <a class="btn-text" href="index.html">Back to Home</a>
+  </div>
+</div>
+
+<script src="js/matrix.js"></script>
+<script src="js/leveling.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/backup.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/register-sw.js"></script>
+</body>
+</html>

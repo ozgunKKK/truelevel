@@ -1,4 +1,4 @@
-const CACHE_NAME = "truelevel-cache-v11";
+const CACHE_NAME = "truelevel-cache-v12";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -7,10 +7,14 @@ const APP_SHELL = [
   "./results.html",
   "./recalibrate.html",
   "./calibrations.html",
+  "./settings.html",
   "./css/style.css",
   "./js/matrix.js",
   "./js/leveling.js",
   "./js/theme.js",
+  "./js/prefs.js",
+  "./js/backup.js",
+  "./js/settings.js",
   "./js/storage.js",
   "./js/home.js",
   "./js/calibrate.js",

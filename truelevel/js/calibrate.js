@@ -25,7 +25,7 @@ function knobStepHtml(knobIndex) {
   const knobNum = knobIndex + 1;
   return `
     <div class="card">
-      <h2>Knob ${knobNum} &mdash; after measurement</h2>
+      <h2>Knob ${knobNum} &mdash; after measurement<span data-unit-note></span></h2>
       <p class="subtitle" style="margin-bottom: 0.75rem;">
         Turn knob ${knobNum} by a known amount, then record the height at
         the same 3 points.
@@ -145,6 +145,7 @@ function render() {
   btnNext.textContent = state.step === TOTAL_STEPS ? "Finish Calibration" : "Next";
   clearError();
   populateFieldsFromState();
+  window.TrueLevelPrefs.applyUnitNotes();
 }
 
 function saveCurrentStepInputs() {

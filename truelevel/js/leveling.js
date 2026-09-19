@@ -37,23 +37,34 @@ function computeStrategyB(K, M) {
   return { turns: vecSub(vecScale(a, hStar), b), targetHeight: hStar };
 }
 
-// Format a signed turn count into display fields.
-function formatTurn(signedTurns) {
+// Format a signed turn count into display fields. `format` is the angle
+// display preference: "turnsDeg" (default), "degrees" or "turns". `display` is
+// the headline, `sub` the secondary line.
+function formatTurn(signedTurns, format) {
   const direction = signedTurns >= 0 ? "Clockwise" : "Counterclockwise";
   const turns = Math.abs(signedTurns);
   const degrees = turns * 360;
   const fullTurns = Math.floor(degrees / 360);
   const remainingDegrees = degrees % 360;
-  const combined =
-    fullTurns >= 1
-      ? `${fullTurns} turn${fullTurns === 1 ? "" : "s"} + ${remainingDegrees.toFixed(1)}°`
-      : `${degrees.toFixed(1)}°`;
-  return {
-    turns,
-    degrees,
-    direction,
-    display: combined,
-  };
+  const deg = `${degrees.toFixed(1)}°`;
+  const tur = turns.toFixed(3);
+
+  let display;
+  let sub;
+  if (format === "degrees") {
+    display = deg;
+    sub = `${tur} turn(s)`;
+  } else if (format === "turns") {
+    display = `${tur} turns`;
+    sub = `${deg} total`;
+  } else {
+    display =
+      fullTurns >= 1
+        ? `${fullTurns} turn${fullTurns === 1 ? "" : "s"} + ${remainingDegrees.toFixed(1)}°`
+        : deg;
+    sub = `${tur} turn(s) · ${deg} total`;
+  }
+  return { turns, degrees, direction, display, sub };
 }
 
 window.TrueLevelCalc = {

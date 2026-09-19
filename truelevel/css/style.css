@@ -737,3 +737,93 @@ html[data-theme="matisse"] input[type="text"] {
 html[data-theme="matisse"] .btn-primary {
   border: 2px solid var(--text);
 }
+
+/* Text size preference (set from Settings) */
+html[data-text-size="small"] {
+  font-size: 90%;
+}
+
+html[data-text-size="large"] {
+  font-size: 115%;
+}
+
+/* Gear link in the home header */
+.icon-btn {
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--page-text);
+  text-decoration: none;
+}
+
+.icon-btn:active {
+  background: rgba(128, 128, 128, 0.25);
+}
+
+/* Settings page */
+.hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0.4rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.hint a {
+  color: var(--accent-text);
+}
+
+.card h3 {
+  font-size: 0.95rem;
+  margin: 1.1rem 0 0.2rem;
+}
+
+.card .stack {
+  margin-top: 0.75rem;
+}
+
+.card .field .btn-text {
+  width: auto;
+  min-height: 0;
+  padding: 0.4rem 0;
+  font-size: 0.82rem;
+}
+
+details.guide {
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.6rem;
+  font-size: 0.88rem;
+}
+
+details.guide summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+details.guide ol {
+  margin: 0.6rem 0 0;
+  padding-left: 1.2rem;
+  line-height: 1.5;
+}
+
+details.guide textarea {
+  width: 100%;
+  margin: 0.6rem 0;
+  padding: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text);
+  background: var(--readout-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+section.card > .hint:first-of-type + .stack,
+section.card > .btn-danger,
+section.card > .btn-secondary {
+  margin-top: 0.75rem;
+}
