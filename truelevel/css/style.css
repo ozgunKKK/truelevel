@@ -308,6 +308,12 @@ button,
   transition: background 0.15s ease, transform 0.05s ease;
 }
 
+button:not(.theme-tile):not(.btn-text),
+.btn {
+  min-height: 3.25rem;
+  border-radius: 999px;
+}
+
 button:active,
 .btn:active {
   transform: scale(0.98);
@@ -431,7 +437,15 @@ button:active,
 
 .center-cta {
   text-align: center;
-  padding: 2rem 0;
+  padding: 1.75rem 1.25rem;
+}
+
+/* The main call to action sits inside its card instead of touching the edges. */
+.center-cta .btn {
+  width: auto;
+  min-width: 75%;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .footer-note {
@@ -525,25 +539,6 @@ html[data-theme="pastel"] input[type="text"],
 html[data-theme="pastel"] .select-option,
 html[data-theme="pastel"] .readout {
   border-radius: 12px;
-}
-
-/* Pastel buttons: taller, pill-shaped, and the main call to action sits
-   inside its card instead of touching the edges. */
-html[data-theme="pastel"] button:not(.theme-tile):not(.btn-text),
-html[data-theme="pastel"] .btn {
-  min-height: 3.25rem;
-  border-radius: 999px;
-}
-
-html[data-theme="pastel"] .center-cta {
-  padding: 1.75rem 1.25rem;
-}
-
-html[data-theme="pastel"] .center-cta .btn {
-  width: auto;
-  min-width: 75%;
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 /* Theme picker (home page) */
